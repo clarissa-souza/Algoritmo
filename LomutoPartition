@@ -1,0 +1,35 @@
+def swap(L,j,i):
+  t= L[j]
+  L[j]=L[i]
+  L[i]=t
+
+def LomutoPartitionn(L,l,r):
+  p = L[r]
+  i= l-1
+  for j in range(l,r):
+    if L[j] <= p:
+      i=i+1          
+      swap (L,i,j)
+  swap(L,i+1,r)
+  return L,i+1
+
+def QuickSortLomuto(A):
+  l=0
+  r=len(A)-1
+  if len(A) > 1:
+    W,p=LomutoPartitionn (A,l,r)    
+    X = W[l: p]
+    Z = W[p: r+1]
+    X=QuickSortLomuto(X)
+    Z=QuickSortLomuto(Z)
+    A=X+Z
+  return A
+
+
+K=[684, 559, 629, 192, 835, 763, 707, 359, 9, 723]
+
+t=sorted(K)
+print('Sorted = ',t)
+
+q=QuickSortLomuto(K)
+print('QuisckSort com Lomuto =',q)
