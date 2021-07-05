@@ -1,0 +1,33 @@
+def HoarePartitionn(A):
+  p=A[0]
+  B=[]
+  D=[]
+  E=[]
+  tam = len(A)
+  for i in range (0,tam):
+    if A[i] < p :
+      B.append(A[i])      
+    else:
+      if A[i] > p :
+        E.append(A[i])
+      else:
+        A[i] = p
+        D.append(A[i])
+  return B,D,E
+
+def QuickSortHoare(A):
+  if len(A) > 1:
+    X,Y,Z=HoarePartitionn (A)
+    X=QuickSortHoare(X)    
+    Z=QuickSortHoare(Z)
+    A=X+Y+Z
+  return A
+
+
+K=[684, 559, 629, 192, 835, 763, 707, 359, 9, 723]
+
+t=sorted(K)
+print('Sorted = ',t)
+
+p=QuickSortHoare(K)
+print('QuisckSort com Hoare =',p)
