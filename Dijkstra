@@ -1,0 +1,29 @@
+# É um dos algoritmos que calcula o caminho de custo mínimo entre vértices de um grafo
+# Encontrar o menor caminho de um vértice a outro
+# A função adjacents retorna os adjacentes do vértice no grafo e getEdges retorna a aresta
+#To do dijkstra
+
+def shortestPath(v,u,P):
+  L=[]
+  while v != u:
+    (p,distuv) = P[u]
+    L.insert(0,u)
+    u=p
+  L.insert(0,u)
+  return L
+
+def dijkstra(G,v,u):
+  P=dict()
+  H=[]
+  heappush(H,(0,None,v))
+  while H != []:
+    (distxv,p,x)=heappop(H)
+    if x == u :
+      P[x] = (p,distxv)
+      return shortestPath(v,u,P)
+    if x not in P:
+      P[x] = (p,distxv)
+      for t in G.adjacents(x):
+        distvt = distxv + G.getEdge(x,t)
+        if t not in P or distvt < P[t][1]:
+          heappush(H,(distvt,x,t))
