@@ -1,5 +1,4 @@
 # Kruskal é um algoritmo em teoria dos grafos que busca uma árvore geradora mínima para um grafo conexo com pesos
-# o objetivo é encontrar o menor caminho para percorrer o grafo. 
 # Utilizei a estrutura heap e a ideia de união de conjunto disjuntos
 # A função edges retorna uma lista com todas as arestas, a função getEdge retorna a aresta no formato origem, destino e peso
 # A função vertices retorna uma lista com todos os vertices, a função addVertex adiciona vértices ao grafo
