@@ -1,3 +1,5 @@
+# Ordenação com Merge sort é um ordenação por comparação do tipo dividir-para-conquistar
+
 def merge(D,L,R):
   li = 0
   ri = 0
