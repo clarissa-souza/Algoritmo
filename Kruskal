@@ -1,0 +1,70 @@
+# Kruskal é um algoritmo em teoria dos grafos que busca uma árvore geradora mínima para um grafo conexo com pesos
+# o objetivo é encontrar o menor caminho para percorrer o grafo. 
+# Utilizei a estrutura heap e a ideia de união de conjunto disjuntos
+# A função edges retorna uma lista com todas as arestas, a função getEdge retorna a aresta no formato origem, destino e peso
+# A função vertices retorna uma lista com todos os vertices, a função addVertex adiciona vértices ao grafo
+
+def kruskals(G): #sempre começa na aresta de menor peso
+  #quantidade de arestas
+  E=[]
+  E= g.edges()
+  print('Lista de arestas E=',E)
+  
+  #transformei a lista de arestas em heap
+  Q=[]
+  for i in range (0,len(E)):
+    edgeo=E[i][0]
+    edged=E[i][1]
+    dist=g.getEdge(edgeo,edged)
+    heappush(Q,(dist,edgeo,edged))
+  print('Transformei em heap Q=',Q)
+
+  #quantidade de vertices
+  T=[]
+  T=g.vertices()
+  print('Lista de vertices=',T)
+  n_vertices=len(T)
+
+  #crio um conjunto para cada vertice e coloco o vertice
+  I=[[] * n_vertices for i in range(n_vertices)]
+  for i in range(0,n_vertices):
+    I[i]=[T[i]]
+  print ('Conjunto de vertices',I)
+
+  #crio o grafo C e coloco os vertices e as arestas no novo grafo
+  C=Graph()
+  for i in g.vertices():
+    C.addVertex(i)
+  print('Vertices do novo grafo:',C.vertices())
+
+  post1=0 #posicao1 para comparacao dos conjuntos
+  post2=0 #posicao2 para comparacao dos conjuntos
+  
+  for i in range (0,len(Q)):
+    (dist,orig,dest)=heappop(Q)
+
+    # coloco sempre em ordem
+    if orig < dest:
+      x,y=orig,dest
+    else:
+      x,y=dest,orig
+    
+    #verifico se já existe no conjunto, se nao existir entao pode inserir uniao de conjuntos disjuntos
+    if [x,y] not in I:
+      for j in range (0,len(I)):
+        if x in I[j]:
+          t1=I[j]
+          post1=j
+        if y in I[j]:
+          t2=I[j]
+          post2=j
+      if t1 != t2:
+        I[post1]=t1+t2
+        I[post2]=[]
+        print('I=',I)
+        C.addEdge(orig,dest,dist)
+
+  print('Vertices do novo grafo=',C.vertices())
+  print('Arestas no novo grafo=',C.edges())
+  
+  return C
