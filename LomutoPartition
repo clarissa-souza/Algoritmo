@@ -1,4 +1,4 @@
-# QuickSort com Lomuto Partition é uma forma de ordenação que utiliza o método diminuit para conquistar
+# QuickSort com Lomuto Partition é uma forma de ordenação que utiliza o método diminuir para conquistar
 
 def swap(L,j,i):
   t= L[j]
